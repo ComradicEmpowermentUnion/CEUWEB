@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comradic Empowerment Union</title>
+<style>
+:root{
+  --primary:#062f4f;
+  --secondary:#1b5e20;
+  --accent:#ffd166;
+  --activities:#4a148c;
+  --results:#e65100;
+  --contact:#004d40;
+  --tamil:#6a1b1a;
+}
+
+/* Global styles */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{display:flex;flex-direction:column;min-height:100vh;background:#f4f6f8;scroll-behavior:smooth;}
+main{flex:1;width:100%;transition:all 0.5s ease;}
+h2{margin-bottom:15px;}
+.container{max-width:1100px;margin:auto;background:#fff;padding:40px;border-radius:12px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.card{background:#f1f5f9;padding:20px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1);transition:0.3s;}
+.card:hover{transform:translateY(-5px);box-shadow:0 6px 15px rgba(0,0,0,.2);}
+.btn{margin-top:15px;padding:10px 18px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:0.3s;}
+.btn:hover{background:#0b3c5d;}
+iframe{width:100%;height:65vh;border:none;border-radius:10px;}
+footer{background:var(--primary);color:#fff;text-align:center;padding:20px;position:relative;}
+section{display:none;min-height:calc(100vh - 140px);padding:40px 20px;animation:fadeSlide .6s;}
+section.active-section{display:block;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+/* Header */
+header{background:linear-gradient(135deg,#0b3c5d,var(--primary));color:#fff;padding:20px;display:flex;align-items:center;gap:15px;position:sticky;top:0;z-index:100;transition:0.3s;}
+header img{height:65px;}
+header h1{font-size:24px;}
+header p{font-size:16px;}
+header.scrolled{box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+
+/* Navbar */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--primary);
+  padding:10px 20px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-links a{color:#fff;margin-right:18px;text-decoration:none;font-weight:bold;position:relative;transition:0.3s;}
+.nav-links a.active, .nav-links a:hover{color:var(--accent);}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0%;height:2px;background:var(--accent);transition:0.3s;}
+.nav-links a.active::after, .nav-links a:hover::after{width:100%;}
+.hamburger{display:none;flex-direction:column;cursor:pointer;}
+.hamburger span{background:#fff;height:3px;width:25px;margin:4px 0;transition:0.3s;}
+
+/* Back to top button */
+#backToTop{position:fixed;bottom:30px;right:30px;background:var(--primary);color:#fff;padding:10px 15px;border-radius:50%;cursor:pointer;display:none;box-shadow:0 4px 10px rgba(0,0,0,.3);transition:0.3s;}
+#backToTop:hover{background:#0b3c5d;}
+
+/* Responsive */
+@media(max-width:768px){
+  .nav-links{position:absolute;top:60px;left:0;width:100%;display:none;flex-direction:column;padding:10px;background:var(--primary);}
+  .nav-links.show{display:flex;}
+  .hamburger{display:flex;}
+  .nav-links a{margin:8px 0;}
+  .container{padding:20px;}
+  iframe{height:50vh;}
+  header h1{font-size:18px;}
+  header p{font-size:14px;}
+  header img{height:50px;}
+  .cards{gap:15px;}
+}
+@media(max-width:400px){
+  .cards{grid-template-columns:1fr;}
+}
+
+/* School download box — UNCHANGED */
+.school-box{
+  background:linear-gradient(rgba(0,0,255,0.3), rgba(255,255,0,0.3));
+  padding:20px;
+  border-radius:8px;
+  max-width:400px;
+  margin:20px auto 0 auto;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+.school-box input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:5px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+.school-box button{
+  width:100%;
+  padding:10px;
+  background:#1976d2;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+  border-radius:5px;
+}
+.school-box button:hover{background:#0d47a1;}
+.school-box a.download-btn{
+  display:inline-block;
+  padding:10px 15px;
+  background:#ffd166;
+  color:#000;
+  text-decoration:none;
+  border-radius:5px;
+  margin-top:10px;
+  font-weight:bold;
+}
+.school-box a.download-btn:hover{background:#fcbf49;}
+.school-box #error{color:red;margin-top:10px;font-weight:bold;}
+.school-box #result{margin-top:15px;}
+</style>
+</head>
+
+<body>
+
+<header id="header">
+  <img src="https://i.imgur.com/RxTg1wC.png" alt="CEU">
+  <div>
+    <h1>Comradic Empowerment Union</h1>
+    <p>Empowering Education • Supporting Society</p>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-links" id="navLinks">
+    <a href="#home" onclick="showSection('home',event)" class="active">Home</a>
+    <a href="#about" onclick="showSection('about',event)">About</a>
+    <a href="#activities" onclick="showSection('activities',event)">Activities</a>
+    <a href="#results" onclick="showSection('results',event)">Results</a>
+    <a href="#contact" onclick="showSection('contact',event)">Contact</a>
+    <a href="#tamil" onclick="showSection('tamil',event)">தமிழ்</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+<section id="home" class="active-section">
+  <div class="container">
+    <h2>Welcome</h2>
+    <p>Comradic Empowerment Union was formed by the 2020 O/L Batch students of BT/Pd/Kakachivaddai Vishnu Maha Vidyalayam.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2>About Us</h2>
+    <p>We empower education and society through structured programs.</p>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="container">
+    <h2>Our Activities</h2>
+    <div class="cards">
+      <div class="card">Free Seminars</div>
+      <div class="card">Model Exams</div>
+      <div class="card">Rural Support</div>
+      <div class="card">Leadership Programs</div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="container">
+    <h2>Exam Results</h2>
+    <iframe src="https://ceu-exams-results.vercel.app/"></iframe>
+
+    <div class="school-box">
+      <h3>Principal Login</h3>
+      <input type="password" id="pwd" placeholder="Enter Password (Census No)">
+      <button onclick="login()">Login</button>
+      <div id="error"></div>
+      <div id="result"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Contact</h2>
+    <p>+94 756886309</p>
+    <p>Batticaloa, Sri Lanka</p>
+  </div>
+</section>
+
+<section id="tamil">
+  <div class="container">
+    <h2>தோழர் சேவை ஒன்றியம்</h2>
+    <p>கல்வி மற்றும் சமூக முன்னேற்றத்திற்காக செயல்படும் அமைப்பு.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+© 2025 Comradic Empowerment Union | Batticaloa, Sri Lanka
+</footer>
+
+<div id="backToTop" onclick="scrollToTop()">↑</div>
+
+<script>
+const navLinks=document.getElementById('navLinks');
+const header=document.getElementById('header');
+
+function showSection(id,event){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active-section'));
+  document.getElementById(id).classList.add('active-section');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  if(event) event.target.classList.add('active');
+  navLinks.classList.remove('show');
+  window.scrollTo(0,0);
+}
+
+function toggleMenu(){navLinks.classList.toggle('show');}
+
+window.onscroll=function(){
+  const backToTop=document.getElementById('backToTop');
+  if(window.scrollY>200){backToTop.style.display='block';header.classList.add('scrolled');}
+  else{backToTop.style.display='none';header.classList.remove('scrolled');}
+}
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'});}
+
+/* 🔗 DIRECT SECTION LINK SUPPORT (ONLY ADDITION) */
+window.addEventListener("load",()=>{
+  const hash=location.hash.replace("#","");
+  if(hash && document.getElementById(hash)){
+    showSection(hash);
+  }
+});
+
+/* Login logic — UNCHANGED */
+const schools={
+  "14209":{name:"BT/PD/KAKACHIVADDAI VISHNU MAHA VIDYALAYA",link:"https://drive.google.com/file/d/1sHmOnq8vmivYZEriweqhA9ZzQqbt5zuT/view"}
+};
+
+function login(){
+  const pwd=document.getElementById("pwd").value.trim();
+  if(schools[pwd]){
+    document.getElementById("result").innerHTML=
+      `<a class="download-btn" target="_blank" href="${schools[pwd].link}">Download</a>`;
+    document.getElementById("error").innerText="";
+  }else{
+    document.getElementById("error").innerText="Invalid password";
+    document.getElementById("result").innerHTML="";
+  }
+}
+</script>
+
+</body>
+</html>

@@ -241,16 +241,22 @@ window.addEventListener("load",()=>{
   }
 });
 
-/* Login logic — UNCHANGED */
+/* Login logic — ONLY SCHOOL NAME ADDED */
 const schools={
-  "14209":{name:"BT/PD/KAKACHIVADDAI VISHNU MAHA VIDYALAYA",link:"https://drive.google.com/file/d/1sHmOnq8vmivYZEriweqhA9ZzQqbt5zuT/view"}
+  "14209": { name: "BT/PD/KAKACHIVADDAI VISHNU MAHA VIDYALAYA", link: "https://drive.google.com/file/d/1sHmOnq8vmivYZEriweqhA9ZzQqbt5zuT/view?usp=sharing" },
+  "14208": { name: "BT/PD/MANDUR 37 NAVAGIRI VIDYALAYA", link: "https://drive.google.com/file/d/16-IFQ45cFJWySpVSscyIgacjSwlSzsyv/view?usp=sharing" },
+  "14215": { name: "BT/PD/PALAMUNAI PALAMURUGAN VIDYALAYA", link: "https://drive.google.com/file/d/1luOFtXhYLtf6o22F7vuUv1iweboRpPG6/view?usp=sharing" },
+  "14206": { name: "BT/PD/SINNAWATHAI MUTHTHAMIL VIDYALAYA", link: "https://drive.google.com/file/d/1tinDjScUdc-WasCZvVr6sHtWZnKCN7Uj/view?usp=sharing" },
+  "14214": { name: "BT/PD/THAMBALAWATHAI GANESHA VIDYALAYA", link: "https://drive.google.com/file/d/1a6SatfYTQuuXCJ6dFf8QpHoa7SZKBB2-/view?usp=sharing" },
+  "14204": { name: "BT/PD/VELLAVELY KALAIMAGAL MAHA VIDYALAYA", link: "https://drive.google.com/file/d/17XMK-pzf1MWz4t3fQE3CHx6r-tTRZfar/view?usp=sharing" }
 };
 
 function login(){
   const pwd=document.getElementById("pwd").value.trim();
   if(schools[pwd]){
     document.getElementById("result").innerHTML=
-      `<a class="download-btn" target="_blank" href="${schools[pwd].link}">Download</a>`;
+      `<p style="font-weight:bold;margin-bottom:8px;">${schools[pwd].name}</p>
+       <a class="download-btn" target="_blank" href="${schools[pwd].link}">Download</a>`;
     document.getElementById("error").innerText="";
   }else{
     document.getElementById("error").innerText="Invalid password";

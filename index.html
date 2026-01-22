@@ -152,7 +152,46 @@ nav{
   <div class="container">
     <h2>Welcome</h2>
     <p>Comradic Empowerment Union was formed by the 2020 O/L Batch students of BT/Pd/Kakachivaddai Vishnu Maha Vidyalayam.</p>
-  </div>
+  </div><br><br>
+  <div style="font-family: 'Courier New', monospace; text-align: center; background: #000; color: #0f0; padding: 20px; border-radius: 10px; width: fit-content; margin: auto; box-shadow: 0 0 15px #0f0;">
+<h2 style="color: #0f0; margin-bottom: 10px;">2025(26)O/L Exam in</h2>
+  <div id="timer" style="font-size: 2em;"></div>
+</div>
+
+<script>
+  // Set your target event date and time
+  var countDownDate = new Date("February 17 , 2026 08:30:00").getTime();
+
+  var timer = setInterval(function () {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days, hours, minutes, seconds, label;
+
+    if (distance >= 0) {
+      // Countdown
+      label = ": ";
+      days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    } else {
+      // Count-up
+      label = "Time Elapsed: ";
+      var elapsed = now - countDownDate;
+      days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+      hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+      seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+    }
+
+    document.getElementById("timer").innerHTML =
+      label + days.toString().padStart(2, '0') + "d " +
+      hours.toString().padStart(2, '0') + "h " +
+      minutes.toString().padStart(2, '0') + "m " +
+      seconds.toString().padStart(2, '0') + "s";
+  }, 1000);
+</script>
 </section>
 
 <section id="about">
@@ -212,6 +251,7 @@ nav{
 <div id="backToTop" onclick="scrollToTop()">↑</div>
 
 <script>
+  
 const navLinks=document.getElementById('navLinks');
 const header=document.getElementById('header');
 
